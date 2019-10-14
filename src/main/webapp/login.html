@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录页面</title>
+    <link rel="stylesheet" href="/css/bootstrap.css">
+</head>
+<body>
+<div class="container">
+    <h2 class="text-center">用户登录</h2>
+    <form class="form-horizontal">
+        <div class="form-group">
+            <label class="col-md-2 col-md-offset-2 control-label" for="username">用户名：</label>
+            <div class="col-md-2">
+                <input class="form-control" type="text" id="username" v-model="user.userName">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 col-md-offset-2 control-label" for="password">密码：</label>
+            <div class="col-md-2">
+                <input class="form-control" type="password" id="password" v-model="user.password">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 col-md-offset-2 control-label"></label>
+            <div class="col-md-1">
+                <button class="btn btn-primary btn-sm" type="button" @click="loginBtn">登录</button>
+            </div>
+        </div>
+    </form>
+</div>
+<script src="/js/jquery-3.4.0.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/vue-2.6.8.js"></script>
+<script>
+    var vue = new Vue({
+        el:".container",
+        data:{
+            user:{}
+        },
+        methods:{
+            loginBtn:function () {
+                $.ajax({
+                    url:"/users/login",
+                    data:this.user,
+                    dataType:"json",
+                    type:"get",
+                    success:function (res) {
+                        if(res.code == 200){
+                            alert("success");
+                            window.location = "/user/list.html";
+                        }else{
+                            alert(res.data);
+                        }
+                    }
+                })
+            }
+        },
+        mounted:function () {
+
+        }
+    })
+</script>
+</body>
+</html>

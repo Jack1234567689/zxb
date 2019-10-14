@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户列表</title>
+    <link rel="stylesheet" href="/css/bootstrap.css">
+</head>
+<body>
+<div class="container">
+    <h2 class="text-center">用户列表</h2>
+    <div class="col-md-2">
+        <button type="button" class="btn-primary btn btn-sm" @click="addUser">添加用户</button>
+    </div>
+    <table class="table table-striped table-hover table-bordered">
+        <thead>
+        <tr>
+            <th>用户名</th>
+            <th>用户姓名</th>
+            <th>拼音码</th>
+            <th>出生日期</th>
+            <th>是否可用</th>
+            <th>所在省份</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for = "item in users">
+            <td>{{item.userId}}</td>
+            <td>{{item.userName}}</td>
+            <td>{{item.py}}</td>
+            <td>{{item.dateOfBirth}}</td>
+            <td>
+                <label v-if="item.enabled==1">可用</label>
+                <label v-if="item.enabled!=1">不可用</label>
+            </td>
+            <td>{{item.nativePlaceProvince}}</td>
+            <td>
+                <button type="button" class="btn btn-primary btn-sm" v-if="item.enabled==1" @click="changeEnabled(item)">禁用</button>
+                <button type="button" class="btn btn-primary btn-sm" v-if="item.enabled!=1" @click="changeEnabled(item)">启用</button>
+                <button type="button" class="btn btn-info btn-sm" @click="editById(item)">修改</button>
+                <button type="button" class="btn btn-success btn-sm" @click="deleteById(item.userId)">删除</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<script src="/js/jquery-3.4.0.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/vue-2.6.8.js"></script>
+<script>
+    var vue = new Vue({
+        el:".container",
+        data:{
+            users:[],
+            user:{}
+        },
+        methods:{
+            queryAllUsers:function () {
+                $.ajax({
+                    url:"/users/list",
+                    data:this.user,
+                    dataType:"json",
+                    type:"get",
+                    success:function (res) {
+                        if(res.code == 200){
+                            vue.users = res.data;
+                        }else{
+                            alert("查询失败");
+                        }
+                    }
+                })
+            },
+            addUser:function () {
+                window.location = "/user/add.html";
+            },
+            editById:function (item) {
+                localStorage.setItem("user",JSON.stringify(item));
+                window.location = "/user/edit.html";
+            },
+            deleteById:function (userId) {
+                $.ajax({
+                    url:"/users/delete",
+                    data:{"id":userId},
+                    dataType:"json",
+                    type:"get",
+                    success:function (res) {
+                        if(res.code == 200){
+                            alert("删除成功");
+                            vue.queryAllUsers();
+                        }else{
+                            alert("删除失败")
+                        }
+                    }
+                })
+            },
+            changeEnabled:function (item) {
+                $.ajax({
+                    url:"/users/changeEnabled",
+                    data:item,
+                    dataType:"json",
+                    type:"get",
+                    success:function (res) {
+                        if(res.code == 200){
+                            alert("修改成功");
+                            vue.queryAllUsers();
+                        }else{
+                            alert("修改失败")
+                        }
+                    }
+                })
+            }
+        },
+        mounted:function () {
+            this.queryAllUsers();
+        }
+    })
+</script>
+</body>
+</html>

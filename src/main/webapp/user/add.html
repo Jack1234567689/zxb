@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/css/bootstrap.css">
+</head>
+<body>
+<div class="container">
+    <h2 class="text-center">添加用户</h2>
+    <form class="form-horizontal">
+        <div class="form-group">
+            <label class="col-md-2 col-md-offset-2 control-label" for="username">用户名：</label>
+            <div class="col-md-2">
+                <input class="form-control" type="text" id="username" v-model="user.userId">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 col-md-offset-2 control-label" for="password">用户姓名：</label>
+            <div class="col-md-2">
+                <input class="form-control" type="text" id="password" v-model="user.userName">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 col-md-offset-2 control-label" for="py">拼音码：</label>
+            <div class="col-md-2">
+                <input class="form-control" type="text" id="py" v-model="user.py">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 col-md-offset-2 control-label" for="dateOfBirth">用户姓名：</label>
+            <div class="col-md-2">
+                <input class="form-control" type="text" id="dateOfBirth" v-model="user.dateOfBirth">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 col-md-offset-2 control-label" for="enabled">可用编码：</label>
+            <div class="col-md-2">
+                <input class="form-control" type="text" id="enabled" v-model="user.enabled">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 col-md-offset-2 control-label" for="nativePlaceProvince">所在省份：</label>
+            <div class="col-md-2">
+                <input class="form-control" type="text" id="nativePlaceProvince" v-model="user.nativePlaceProvince">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 col-md-offset-2 control-label"></label>
+            <div class="col-md-1">
+                <button class="btn btn-primary btn-sm" type="button" @click="saveAdd">保存</button>
+            </div>
+        </div>
+    </form>
+</div>
+<script src="/js/jquery-3.4.0.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/vue-2.6.8.js"></script>
+<script>
+    var vue = new Vue({
+        el:".container",
+        data:{
+            user:{}
+        },
+        methods:{
+            saveAdd:function () {
+                $.ajax({
+                    url:"/users/add",
+                    data:this.user,
+                    dataType:"json",
+                    type:"get",
+                    success:function (res) {
+                        if(res.code == 200){
+                            alert("添加成功");
+                            window.location = "/user/list.html";
+                        }else{
+                            alert("添加失败")
+                        }
+                    }
+                })
+            }
+        },
+        mounted:function () {
+
+        }
+    })
+</script>
+</body>
+</html>

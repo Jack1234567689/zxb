@@ -2,24 +2,27 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>用户列表</title>
+    <title>传承人列表</title>
     <link rel="stylesheet" href="/css/bootstrap.css">
 </head>
 <body>
 <div class="container">
-    <h2 class="text-center">用户列表</h2>
+    <h2 class="text-center">传承人列表</h2>
     <div class="col-md-2">
-        <button type="button" class="btn-primary btn btn-sm" @click="addUser">添加用户</button>
+        <button type="button" class="btn-primary btn btn-sm" @click="addUser">添加传承人</button>
     </div>
     <table class="table table-striped table-hover table-bordered">
         <thead>
         <tr>
-            <th>用户名</th>
-            <th>用户姓名</th>
-            <th>拼音码</th>
-            <th>出生日期</th>
-            <th>是否可用</th>
-            <th>所在省份</th>
+            <th>编号</th>
+            <th>姓名</th>
+            <th>非遗类别</th>
+            <th>非遗级别</th>
+            <th>出生年月</th>
+            <th>逝世年月</th>
+            <th>籍贯</th>
+            <th>民族</th>
+            <th>擅长方向</th>
             <th>操作</th>
         </tr>
         </thead>
@@ -27,16 +30,14 @@
         <tr v-for = "item in users">
             <td>{{item.userId}}</td>
             <td>{{item.userName}}</td>
-            <td>{{item.py}}</td>
+            <td>{{item.nonLegacyCategories}}</td>
+            <td>{{item.nonLegacyLevel}}</td>
             <td>{{item.dateOfBirth}}</td>
+            <td>{{item.dateOfDeath}}</td>
+            <td>{{item.birthPlace}}</td>
+            <td>{{item.nationality}}</td>
+            <td>{{item.speciality}}</td>
             <td>
-                <label v-if="item.enabled==1">可用</label>
-                <label v-if="item.enabled!=1">不可用</label>
-            </td>
-            <td>{{item.nativePlaceProvince}}</td>
-            <td>
-                <button type="button" class="btn btn-primary btn-sm" v-if="item.enabled==1" @click="changeEnabled(item)">禁用</button>
-                <button type="button" class="btn btn-primary btn-sm" v-if="item.enabled!=1" @click="changeEnabled(item)">启用</button>
                 <button type="button" class="btn btn-info btn-sm" @click="editById(item)">修改</button>
                 <button type="button" class="btn btn-success btn-sm" @click="deleteById(item.userId)">删除</button>
             </td>
@@ -55,21 +56,22 @@
             user:{}
         },
         methods:{
-            queryAllUsers:function () {
+            queryAll:function(pageNo,pageSize){
                 $.ajax({
-                    url:"/users/list",
+                    url:"/users/listPage?pageNo="+pageNo+"&pageSize="+pageSize,
                     data:this.user,
                     dataType:"json",
                     type:"get",
                     success:function (res) {
                         if(res.code == 200){
-                            vue.users = res.data;
+                            vue.users = res.data.records;
                         }else{
                             alert("查询失败");
                         }
                     }
                 })
             },
+
             addUser:function () {
                 window.location = "/user/add.html";
             },
@@ -86,32 +88,16 @@
                     success:function (res) {
                         if(res.code == 200){
                             alert("删除成功");
-                            vue.queryAllUsers();
+                            vue.queryAll(1,5);
                         }else{
                             alert("删除失败")
-                        }
-                    }
-                })
-            },
-            changeEnabled:function (item) {
-                $.ajax({
-                    url:"/users/changeEnabled",
-                    data:item,
-                    dataType:"json",
-                    type:"get",
-                    success:function (res) {
-                        if(res.code == 200){
-                            alert("修改成功");
-                            vue.queryAllUsers();
-                        }else{
-                            alert("修改失败")
                         }
                     }
                 })
             }
         },
         mounted:function () {
-            this.queryAllUsers();
+            this.queryAll(1,5);
         }
     })
 </script>

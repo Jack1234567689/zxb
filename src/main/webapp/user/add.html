@@ -7,42 +7,60 @@
 </head>
 <body>
 <div class="container">
-    <h2 class="text-center">添加用户</h2>
+    <h2 class="text-center">更新传承人信息</h2>
     <form class="form-horizontal">
         <div class="form-group">
-            <label class="col-md-2 col-md-offset-2 control-label" for="username">用户名：</label>
+            <label class="col-md-2 col-md-offset-2 control-label" for="userName">姓名：</label>
             <div class="col-md-2">
-                <input class="form-control" type="text" id="username" v-model="user.userId">
+                <input class="form-control" type="text" id="userName" v-model="user.userName">
             </div>
         </div>
         <div class="form-group">
-            <label class="col-md-2 col-md-offset-2 control-label" for="password">用户姓名：</label>
+            <label class="col-md-2 col-md-offset-2 control-label" for="password">密码：</label>
             <div class="col-md-2">
-                <input class="form-control" type="text" id="password" v-model="user.userName">
+                <input class="form-control" type="text" id="password" v-model="user.password">
             </div>
         </div>
         <div class="form-group">
-            <label class="col-md-2 col-md-offset-2 control-label" for="py">拼音码：</label>
+            <label class="col-md-2 col-md-offset-2 control-label" for="nonLegacyCategories">非遗类别：</label>
             <div class="col-md-2">
-                <input class="form-control" type="text" id="py" v-model="user.py">
+                <input class="form-control" type="text" id="nonLegacyCategories" v-model="user.nonLegacyCategories">
             </div>
         </div>
         <div class="form-group">
-            <label class="col-md-2 col-md-offset-2 control-label" for="dateOfBirth">用户姓名：</label>
+            <label class="col-md-2 col-md-offset-2 control-label" for="nonLegacyLevel">非遗级别：</label>
+            <div class="col-md-2">
+                <input class="form-control" type="text" id="nonLegacyLevel" v-model="user.nonLegacyLevel">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 col-md-offset-2 control-label" for="dateOfBirth">出生年月：</label>
             <div class="col-md-2">
                 <input class="form-control" type="text" id="dateOfBirth" v-model="user.dateOfBirth">
             </div>
         </div>
         <div class="form-group">
-            <label class="col-md-2 col-md-offset-2 control-label" for="enabled">可用编码：</label>
+            <label class="col-md-2 col-md-offset-2 control-label" for="dateOfDeath">逝世年月：</label>
             <div class="col-md-2">
-                <input class="form-control" type="text" id="enabled" v-model="user.enabled">
+                <input class="form-control" type="text" id="dateOfDeath" v-model="user.dateOfDeath">
             </div>
         </div>
         <div class="form-group">
-            <label class="col-md-2 col-md-offset-2 control-label" for="nativePlaceProvince">所在省份：</label>
+            <label class="col-md-2 col-md-offset-2 control-label" for="birthPlace">籍贯：</label>
             <div class="col-md-2">
-                <input class="form-control" type="text" id="nativePlaceProvince" v-model="user.nativePlaceProvince">
+                <input class="form-control" type="text" id="birthPlace" v-model="user.birthPlace">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 col-md-offset-2 control-label" for="nationality">所属民族：</label>
+            <div class="col-md-2">
+                <input class="form-control" type="text" id="nationality" v-model="user.nationality">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 col-md-offset-2 control-label" for="speciality">擅长方向：</label>
+            <div class="col-md-2">
+                <input class="form-control" type="text" id="speciality" v-model="user.speciality">
             </div>
         </div>
         <div class="form-group">

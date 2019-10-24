@@ -1,6 +1,8 @@
 package com.zxb.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.zxb.po.User;
 import com.zxb.service.UserServiceI;
 import com.zxb.vo.AjaxResult;
@@ -30,13 +32,14 @@ public class UserController {
         }
     }
 
-    @GetMapping("/list")
+    @GetMapping("/listPage")
     @ResponseBody
-    public AjaxResult list(User user){
+    public AjaxResult listPage(int pageNo,int pageSize,User user){
         QueryWrapper<User> wrapper = new QueryWrapper<>();
-        List<User> list = userService.list(wrapper);
-        if(list!=null&&list.size()>0){
-            return new AjaxResult(200,"查询成功",list);
+        IPage<User> page = new Page<>(1,5);
+        IPage<User> page1 = userService.page(page, wrapper);
+        if(page1!=null&&page1.getRecords()!=null&&page1.getRecords().size()>0){
+            return new AjaxResult(200,"查询成功",page1);
         }else{
             return new AjaxResult(400,"查询失败");
         }
@@ -83,19 +86,4 @@ public class UserController {
         }
     }
 
-    @GetMapping("/changeEnabled")
-    @ResponseBody
-    public AjaxResult changeEnabled(User user) {
-        if(user.getEnabled().equals("1")){
-            user.setEnabled("0");
-        }else{
-            user.setEnabled("1");
-        }
-        boolean flag = userService.updateById(user);
-        if(flag){
-            return new AjaxResult(200,"修改成功");
-        }else{
-            return new AjaxResult(400,"修改失败");
-        }
-    }
 }

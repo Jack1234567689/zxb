@@ -1,7 +1,6 @@
 package com.zxb.po;
 
 import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 
@@ -12,33 +11,15 @@ public class User {
     private Integer userId;
     private String userName;
     private String password;
-    private String py;
+    private String nonLegacyCategories;
+    private String nonLegacyLevel;
     private String dateOfBirth;
-    private String enabled;
-    @TableField("isdeleted")
-    private String isDeleted;
-    private String salary;
-    private String nativePlaceProvince;
-    private String nativePlaceCity;
+    private String dateOfDeath;
+    private String birthPlace;
+    private String nationality;
+    private String speciality;
 
-    public User() {
-    }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "userId=" + userId +
-                ", userName='" + userName + '\'' +
-                ", password='" + password + '\'' +
-                ", py='" + py + '\'' +
-                ", dateOfBirth='" + dateOfBirth + '\'' +
-                ", enabled='" + enabled + '\'' +
-                ", isDeleted='" + isDeleted + '\'' +
-                ", salary='" + salary + '\'' +
-                ", nativePlaceProvince='" + nativePlaceProvince + '\'' +
-                ", nativePlaceCity='" + nativePlaceCity + '\'' +
-                '}';
-    }
 
     public Integer getUserId() {
         return userId;
@@ -56,20 +37,20 @@ public class User {
         this.userName = userName;
     }
 
-    public String getPassword() {
-        return password;
+    public String getNonLegacyCategories() {
+        return nonLegacyCategories;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setNonLegacyCategories(String nonLegacyCategories) {
+        this.nonLegacyCategories = nonLegacyCategories;
     }
 
-    public String getPy() {
-        return py;
+    public String getNonLegacyLevel() {
+        return nonLegacyLevel;
     }
 
-    public void setPy(String py) {
-        this.py = py;
+    public void setNonLegacyLevel(String nonLegacyLevel) {
+        this.nonLegacyLevel = nonLegacyLevel;
     }
 
     public String getDateOfBirth() {
@@ -80,57 +61,76 @@ public class User {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public String getEnabled() {
-        return enabled;
+    public String getDateOfDeath() {
+        return dateOfDeath;
     }
 
-    public void setEnabled(String enabled) {
-        this.enabled = enabled;
+    public void setDateOfDeath(String dateOfDeath) {
+        this.dateOfDeath = dateOfDeath;
     }
 
-    public String getIsDeleted() {
-        return isDeleted;
+    public String getBirthPlace() {
+        return birthPlace;
     }
 
-    public void setIsDeleted(String isDeleted) {
-        this.isDeleted = isDeleted;
+    public void setBirthPlace(String birthPlace) {
+        this.birthPlace = birthPlace;
     }
 
-    public String getSalary() {
-        return salary;
+    public String getNationality() {
+        return nationality;
     }
 
-    public void setSalary(String salary) {
-        this.salary = salary;
+    public void setNationality(String nationality) {
+        this.nationality = nationality;
     }
 
-    public String getNativePlaceProvince() {
-        return nativePlaceProvince;
+    public String getSpeciality() {
+        return speciality;
     }
 
-    public void setNativePlaceProvince(String nativePlaceProvince) {
-        this.nativePlaceProvince = nativePlaceProvince;
+    public void setSpeciality(String speciality) {
+        this.speciality = speciality;
     }
 
-    public String getNativePlaceCity() {
-        return nativePlaceCity;
+    public User() {
     }
 
-    public void setNativePlaceCity(String nativePlaceCity) {
-        this.nativePlaceCity = nativePlaceCity;
+    public String getPassword() {
+        return password;
     }
 
-    public User(Integer userId, String userName, String password, String py, String dateOfBirth, String enabled, String isDeleted, String salary, String nativePlaceProvince, String nativePlaceCity) {
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public User(Integer userId, String userName, String password, String nonLegacyCategories, String nonLegacyLevel, String dateOfBirth, String dateOfDeath, String birthPlace, String nationality, String speciality) {
         this.userId = userId;
         this.userName = userName;
         this.password = password;
-        this.py = py;
+        this.nonLegacyCategories = nonLegacyCategories;
+        this.nonLegacyLevel = nonLegacyLevel;
         this.dateOfBirth = dateOfBirth;
-        this.enabled = enabled;
-        this.isDeleted = isDeleted;
-        this.salary = salary;
-        this.nativePlaceProvince = nativePlaceProvince;
-        this.nativePlaceCity = nativePlaceCity;
+        this.dateOfDeath = dateOfDeath;
+        this.birthPlace = birthPlace;
+        this.nationality = nationality;
+        this.speciality = speciality;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId=" + userId +
+                ", userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
+                ", nonLegacyCategories='" + nonLegacyCategories + '\'' +
+                ", nonLegacyLevel='" + nonLegacyLevel + '\'' +
+                ", dateOfBirth='" + dateOfBirth + '\'' +
+                ", dateOfDeath='" + dateOfDeath + '\'' +
+                ", birthPlace='" + birthPlace + '\'' +
+                ", nationality='" + nationality + '\'' +
+                ", speciality='" + speciality + '\'' +
+                '}';
     }
 }
 

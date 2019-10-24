@@ -23,18 +23,18 @@ DROP TABLE IF EXISTS `user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `user` (
-  `user_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(10) NOT NULL AUTO_INCREMENT,
   `user_name` varchar(45) DEFAULT NULL,
   `password` varchar(45) DEFAULT NULL,
-  `py` varchar(45) DEFAULT NULL,
+  `non_legacy_categories` varchar(45) DEFAULT NULL,
+  `non_legacy_level` varchar(45) DEFAULT NULL,
   `date_of_birth` varchar(45) DEFAULT NULL,
-  `enabled` varchar(1) DEFAULT NULL,
-  `isdeleted` varchar(1) DEFAULT NULL,
-  `salary` varchar(45) DEFAULT NULL,
-  `native_place_province` varchar(45) DEFAULT NULL,
-  `native_place_city` varchar(45) DEFAULT NULL,
+  `date_of_death` varchar(45) DEFAULT NULL,
+  `birth_place` varchar(45) DEFAULT NULL,
+  `nationality` varchar(45) DEFAULT NULL,
+  `speciality` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,7 +43,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (13,'111','698d51a19d8a121ce581499d7b701668','111','111','1','1','111','111','111'),(14,'222','bcbe3365e6ac95ea2c0343a2395834dd','222','222','0','1','222','222','222'),(15,'333','310dcbbf4cce62f762a2aaa148d556bd','333','333','1','0','333','333','333'),(16,'444','550a141f12de6341fba65b0ad0433500','444','444','0','0','444','444','444'),(17,'555','15de21c670ae7c3f6f3f1f37029303c9','555','555','1','0','555','555','555'),(18,'666','fae0b27c451c728867a567e8c1bb4e53','666','666','1','0','666','666','666'),(19,'777','f1c1592588411002af340cbaedd6fc33','777','777','0','1','777','777','777'),(20,'888','0a113ef6b61820daa5611c870ed8d5ee','888','888','0','0','88','888','888'),(21,'111',NULL,'111','111','1',NULL,NULL,'111',NULL),(22,'32',NULL,'33','333','0',NULL,NULL,'333',NULL);
+INSERT INTO `user` VALUES (2,'张三','123','传统音乐','重庆市级','1779-04','1873-03','重庆秀山县','土家','二胡'),(3,'王二','123','传统舞蹈','区级','1638-02','1724-01','重庆武隆','苗族','民族舞'),(4,'111','111','111','7777','1111','11','11','11','11');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -56,4 +56,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-10-14  0:16:39
+-- Dump completed on 2019-10-23 17:40:19
